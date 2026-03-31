@@ -47,6 +47,12 @@ int main() {
 
     cin >> n >> m;
 
+    // Initialize arrays
+    memset(degree, 0, sizeof(degree));
+    memset(removed, false, sizeof(removed));
+    memset(color, -1, sizeof(color));
+    memset(inOddCycle, false, sizeof(inOddCycle));
+
     for (int i = 0; i < m; i++) {
         int x, y;
         cin >> x >> y;
@@ -59,7 +65,6 @@ int main() {
     // Remove all leaf nodes (degree 1) iteratively
     // These nodes cannot be in any cycle
     queue<int> q;
-    memset(removed, false, sizeof(removed));
 
     for (int i = 1; i <= n; i++) {
         if (degree[i] <= 1) {
@@ -85,8 +90,6 @@ int main() {
     }
 
     // Now check remaining nodes for odd cycles
-    memset(color, -1, sizeof(color));
-    memset(inOddCycle, false, sizeof(inOddCycle));
 
     for (int i = 1; i <= n; i++) {
         if (!removed[i] && color[i] == -1) {
